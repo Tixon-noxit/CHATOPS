@@ -33,8 +33,8 @@ Telegram-бот для быстрого реагирования на инцид
 ### Установка
 ```bash
 # Клонировать репозиторий
-git clone https://github.com/yourname/chatops-bot.git
-cd chatops-bot
+git clone https://github.com/Tixon-noxit/CHATOPS.git
+cd CHATOPS
 
 # Установить зависимости (Python)
 pip install -r backend/requirements.txt
