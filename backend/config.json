@@ -1,0 +1,9 @@
+{
+  "token": "7107706287:AAGVQV9gWCVyo3zpKkNrMoVdsBpVTh4nbrM",
+  "api_url": "http://91.194.246.240:5000/api",
+  "webhook": {
+    "ip": "91.194.246.240",
+    "url": "http://91.194.246.240:5000/api",
+    "port": 5000
+  }
+}
