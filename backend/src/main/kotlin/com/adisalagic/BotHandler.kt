@@ -5,6 +5,7 @@ import com.github.kotlintelegrambot.dispatcher.Dispatcher
 import com.github.kotlintelegrambot.dispatcher.callbackQuery
 import com.github.kotlintelegrambot.dispatcher.command
 import com.github.kotlintelegrambot.dispatcher.message
+import com.github.kotlintelegrambot.entities.ParseMode
 import kotlinx.coroutines.*
 
 object BotHandler {
@@ -31,6 +32,14 @@ object BotHandler {
                     ContextType.SCALE -> {
                         val arg = contextArgs.getOrNull(0)?.toIntOrNull()
                         if (arg != null) {
+                            if (arg == 0) {
+                                bot.sendMessage(
+                                    chatId = currentContext!!.chatId.tgid,
+                                    "❌ Number must be greater or less than 0. *Operation canceled*",
+                                    parseMode = ParseMode.MARKDOWN
+                                )
+                                currentContext = null
+                            }
                             api.requestScale(arg, currentContext!!.chatId)
                         }
                     }
@@ -64,6 +73,7 @@ object BotHandler {
             if (args.isEmpty()) {
 //                bot.sendMessage(chatId = message.chat.id.tgid, "No arguments were provided. It's rather +N or -N")
                 bot.sendMessage(chatId = message.chat.id.tgid, "Enter an integer to scale for")
+                update.consume()
                 return@command
             }
             contextArgs = args
@@ -71,6 +81,7 @@ object BotHandler {
         }
         message {
             if (currentContext?.contextType == ContextType.SCALE) {
+                if (message.text?.contains("scale") == true) return@message
                 val num = message
                     .text
                     ?.split(" ")
@@ -86,7 +97,8 @@ object BotHandler {
                 if (num == 0) {
                     bot.sendMessage(
                         chatId = message.chat.id.tgid,
-                        "❌ Number must be greater or less than 0"
+                        "❌ Number must be greater or less than 0. *Operation canceled*",
+                        parseMode = ParseMode.MARKDOWN
                     )
                     currentContext = null
                     return@message
