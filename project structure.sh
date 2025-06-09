@@ -1,4 +1,5 @@
-chatops-bot/  
+
+chatops-bot/
 ├── .github/                  # GitHub Actions (CI/CD)  
 │   ├── workflows/  
 │   │   ├── test.yaml         # Unit + Integration tests  
